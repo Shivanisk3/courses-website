@@ -1,0 +1,47 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+<section class="aboutsec">
+		<div class="about-wrapper">
+			<div class="about-left">
+				<div class="about-left-content">
+					<div>
+						<div class="shadow">
+							<div class="about-img">
+								<img src="{% static 'users/img/laptop.jpg' %}" alt="about image">
+							</div>
+						</div>
+						<h2>Learn from home<br></h2>
+						<h3>Online learning platform</h3>
+					</div>
+					<ul class="icons">
+						<li><i class="fab fa-facebook-f"></i></li>
+						<li><i class="fab fa-twitter"></i></li>
+						<li><i class="fab fa-linkedin"></i></li>
+						<li><i class="fab fa-instagram"></i></li>
+					</ul>
+				</div>
+			</div>
+			<div class="about-right">
+				<h1> Hi<span>!</span></h1>
+				<h2>Here's who we are & what we do</h2>
+				{% if user.is_authenticated %}
+				<h5></h5>
+				{% else %}
+				<div class="about-btns">
+					<button type="button" id="" class="btn btn-pink"><a href="{% url 'register' %}" style="color: white;">Register</a></button>
+					<!--<button type="button" class="btn btn-pink">Read</button>-->
+				</div>
+				{% endif %}
+				<div class="about-para">
+					<p>Learn from Home is an Online learning platform where you can find all kinds of online courses, trainings, workshops in one place. Motive of this project is to make online learning simple and effective. The project is constantly under development and we are further adding the features of blogs/articles, webinars, free resource section as well. Resister now to start your learning journey! or contact us if you want join as instructor.</p>
+					<p>The project is developed by : Shivani Kulkarni (Team leader), Selina Kota and Ruchika Ambat; under the guidence of D.D.Awasekar mam.</p>
+				</div>
+			</div>
+
+		</div>
+
+
+
+</section>
+{% endblock content %}

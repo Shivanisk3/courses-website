@@ -1,0 +1,82 @@
+{% extends 'users/dashboard_base.html' %}
+{% load static %}
+{% block dashboard %}
+<div class="container" style="margin-top: 25px;">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Dashboard &gt; Edit course</h1>
+		</div>
+		<div class="col-md-8 mx-auto">
+            <div class="card">
+            	    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-center">
+                                        <img src="/media/{{course.course_image}}" style="height:200px;width:40%;">
+                                    </div>
+                                    <label class="mt-3">Update Image: </label>
+                                    <input type="file" class="form-control" name="pimg">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">Course Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="pname" value="{{course.course_name}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="">Course section</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="pcat" id="" class="form-control">
+                                        {% for i in section %}
+                                            {% if i.id == course.course_section.id %}
+                                            <option value="{{i.id}}" selected>{{i.sec_name}}</option>
+                                            {% else %}
+                                            <option value="{{i.id}}">{{i.sec_name}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="">Course Price</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" name="pp" class="form-control" value="{{course.course_price}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="">Sale Price</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="" name="sp" class="form-control" value="{{course.sale_price}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="">Details</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea name="des" class="form-control" rows="5">
+                                        {{course.details}}
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="submit" class="btn" value="Save changes">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+	</div>
+</div>
+{% endblock %}

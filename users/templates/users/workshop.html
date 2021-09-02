@@ -1,0 +1,404 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+<div class="wrapper">
+	<div class="links">
+		<ul>
+			<li data-view="list-view" class="li-list active">
+			<i class="fas fa-th-list"></i>
+			Workshops</li>
+		</ul>
+	</div>
+	<div class="view_main">
+		<div class="view_wrap list-view" style="display: block;">
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/stress.png' %}" alt="stress">
+				</div>
+				<div class="vi_right">
+					<p class="title">Stress Management</p>
+					<p class="content">Stress is part of being human, and it can help motivate you to get things done.<span id="dots"></span><span id="more">Even high stress from serious illness, job loss, a death in the family, or a painful life event can be a natural part of life. You may feel down or anxious, and that’s normal too for a while. Using time effectively gives the person "choice" on spending or managing activities at their own time and expediency.</p>
+					<B><p class="para">Date: 8 August 2021
+					   Time: 2.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read" onclick="read()"><strong>View More</strong></div>
+					<div id="" class="btn2"><strong>Register</strong></div>
+				</div>
+
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/anger.png' %}" alt="anger">
+				</div>
+				<div class="vi_right">
+					<p class="title">Anger Management</p>
+					<p class="content">Anger management is a psycho-therapeutic program for anger prevention and control. It has been described as deploying anger successfully.<span id="dots2"></span><span id="more2"> Anger is frequently a result of frustration, or of feeling blocked or thwarted from something the subject feels is important. Using time effectively gives the person "choice" on spending or managing activities at their own time and expediency.</p>
+					<B><p class="para">Date: 10 August 2021
+					   Time: 4.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read2" onclick="read1()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/PD.png' %}" alt="PD">
+				</div>
+				<div class="vi_right">
+					<p class="title">Personality Development</p>
+					<p class="content">Personality development encompasses the dynamic construction and deconstruction of integrative characteristics that distinguish an individual in terms of interpersonal behavioral traits.
+						<span id="dots3"></span>
+						<span id="more3">Indeed, personality development is ever-changing and subject to contextual factors and life-altering experiences. Using time effectively gives the person "choice" on spending or managing activities at their own time and expediency.
+						</span>
+						</p>
+					<span><B><p class="para">Date: 12 August 2021
+					   Time: 4.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read3" onclick="read2()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/time.png' %}" alt="time">
+				</div>
+				<div class="vi_right">
+					<p class="title">Time Management</p>
+					<p class="content">Time management is the process of planning and exercising conscious control of time spent on specific activities, especially to increase effectiveness, efficiency, and productivity.<span id="dots4">...</span><span id="more4"> Using time effectively gives the person "choice" on spending or managing activities at their own time and expediency. Using time effectively gives the person "choice" on spending or managing activities at their own time and expediency.</p>
+					<B><p class="para">Date: 14 August 2021
+					   Time: 3.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read4" onclick="read3()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/confidence.png' %}" alt="confidence">
+				</div>
+				<div class="vi_right">
+					<p class="title">Developing Self confidence</p>
+					<p class="content">Self-confidence is an attitude about your skills and abilities. It means you accept and trust yourself and have a sense of control in your life. <span id="dots5"></span><span id="more5">An appointed leader is designated by an authority to serve in that capacity. You know your strengths and weakness well, and have a positive view of yourself. You set realistic expectations and goals, communicate assertively, and can handle criticism.</p>
+					<B><p class="para">Date: 17 August 2021
+					   Time: 5.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read5" onclick="read4()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/teamwork.png' %}" alt="teamwork">
+				</div>
+				<div class="vi_right">
+					<p class="title">Wisdom leadership and teamwork</p>
+					<p class="content">Teamwork is a compound word, combining team and work. Teams are a form of group normally dedicated to production or problem solving.<span id="dots6"></span><span id="more6">Leaders take on the role because they are appointed, elected, or emerge into the role. The group members play an important role in this process. An appointed leader is designated by an authority to serve in that capacity, irrespective of the thoughts or wishes of the group.</p>
+					<B><p class="para">Date: 19 August 2021
+					   Time: 4.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read6" onclick="read5()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/Presentation.png' %}" alt="Presentation">
+				</div>
+				<div class="vi_right">
+					<p class="title">Presentation skills</p>
+					<p class="content">Presentation skills are the skills you need in delivering effective and engaging presentations to a variety of audiences.<span id="dots7"></span><span id="more7"> These skills cover a variety of areas such as the structure of your presentation, the design of your slides, the tone of your voice and the body language you convey.</p>
+					<B><p class="para">Date: 21 August 2021
+					   Time: 6.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read7" onclick="read6()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/apti.png' %}" alt="aptitude">
+				</div>
+				<div class="vi_right">
+					<p class="title">Aptitude Skills</p>
+					<p class="content">An aptitude is a component of a competence to do a certain kind of work at a certain level. ... <span id="dots8"></span><span id="more8">Aptitude is inborn potential to do certain kinds of work whether developed or undeveloped. Ability is developed knowledge, understanding, learnt or acquired abilities (skills) or attitude.</p>
+					<B><p class="para">Date: 23 August 2021
+					   Time: 11.00 am</p></B></span>
+					<div class="btn1" type="button" id="read8" onclick="read7()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/django.png' %}" alt="Django">
+				</div>
+				<div class="vi_right">
+					<p class="title">Introduction to Django </p>
+					<p class="content">Django is a high-level Python web framework that enables rapid development of secure and maintainable websites. <span id="dots9"></span><span id="more9"> Built by experienced developers, Django takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It is free and open source, has a thriving and active community, great documentation, and many options for free and paid-for support. </p>
+					<B><p class="para">Date: 24 August 2021
+					   Time: 12.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read9" onclick="read8()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+			</div>
+			<div class="view_item">
+				<div class="vi_left">
+					<img src="{% static 'users/img/js.png' %}" alt="js">
+				</div>
+				<div class="vi_right">
+					<p class="title">Introduction to Javascript</p>
+					<p class="content">JavaScript is a lightweight, cross-platform, and interpreted scripting language.<span id="dots10"></span><span id="more10"> It is well-known for the development of web pages, many non-browser environments also use it. JavaScript can be used for Client-side developments as well as Server-side developments</p>
+					<B><p class="para">Date: 26 August 2021
+					   Time: 1.00 pm</p></B></span>
+					<div class="btn1" type="button" id="read10" onclick="read9()"><strong>View More</strong></div>
+					<div class="btn2"><strong>Register</strong></div>
+				</div>
+		</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+		var i=0;
+		function read(){
+			if(!i){
+				document.getElementById("more").style.
+				display = "inline";
+				document.getElementById("dots").style.
+				display = "inline";
+				document.getElementById("read").innerHTML = "View Less";
+
+
+						i=1
+			}
+			else{
+
+				document.getElementById("more").style.
+				display = "none";
+				document.getElementById("dots").style.
+				display = "inline";
+				document.getElementById("read").innerHTML = "View More";
+
+				i=0;
+
+			}
+		}
+		function read1(){
+			if(!i){
+//for button 2
+				document.getElementById("more2").style.
+				display = "inline";
+				document.getElementById("dots2").style.
+				display = "inline";
+				document.getElementById("read2").innerHTML = "View Less";
+
+			i=2
+			}
+			else
+			{
+
+				//for button 2
+				document.getElementById("more2").style.
+				display = "none";
+				document.getElementById("dots2").style.
+				display = "inline";
+				document.getElementById("read2").innerHTML = "View More";
+				i=0;
+			}
+
+		}
+
+        function read2(){
+			if(!i){
+//for button 3
+				document.getElementById("more3").style.
+				display = "inline";
+				document.getElementById("dots3").style.
+				display = "inline";
+				document.getElementById("read3").innerHTML = "View Less";
+
+				i=3
+			}
+			else
+			{
+
+				//for button 3
+				document.getElementById("more3").style.
+				display = "none";
+				document.getElementById("dots3").style.
+				display = "inline";
+				document.getElementById("read3").innerHTML = "View More";
+				i=0;
+			}
+		}
+        function read3(){
+			if(!i){
+//for button 4
+				document.getElementById("more4").style.
+				display = "inline";
+				document.getElementById("dots4").style.
+				display = "inline";
+				document.getElementById("read4").innerHTML = "View Less";
+
+					i=4
+
+			}
+			else
+			{
+
+					//for button 4
+				document.getElementById("more4").style.
+				display = "none";
+				document.getElementById("dots4").style.
+				display = "inline";
+				document.getElementById("read4").innerHTML = "View More";
+				i=0;
+			}
+		}
+		function read4(){
+			if(!i){
+//for button 5
+				document.getElementById("more5").style.
+				display = "inline";
+				document.getElementById("dots5").style.
+				display = "inline";
+				document.getElementById("read5").innerHTML = "View Less";
+
+				i=5
+			}
+			else
+			{
+
+					//for button 5
+				document.getElementById("more5").style.
+				display = "none";
+				document.getElementById("dots5").style.
+				display = "inline";
+				document.getElementById("read5").innerHTML = "View More";
+				i=0;
+
+			}
+		}
+
+		function read5(){
+			if(!i){
+//for button 6
+
+				document.getElementById("more6").style.
+				display = "inline";
+				document.getElementById("dots6").style.
+				display = "inline";
+				document.getElementById("read6").innerHTML = "View Less";
+
+
+				i=6
+			}
+			else
+			{
+//for button 6
+
+				document.getElementById("more6").style.
+				display = "none";
+				document.getElementById("dots6").style.
+				display = "inline";
+				document.getElementById("read6").innerHTML = "View More";
+				i=0;
+
+			}
+		}
+		function read6(){
+			if(!i){
+
+				//for button 7
+
+				document.getElementById("more7").style.
+				display = "inline";
+				document.getElementById("dots7").style.
+				display = "inline";
+				document.getElementById("read7").innerHTML = "View Less";
+
+
+				i=7
+			}
+			else
+			{
+
+//for button 7
+				document.getElementById("more7").style.
+				display = "none";
+				document.getElementById("dots7").style.
+				display = "inline";
+				document.getElementById("read7").innerHTML = "View More";
+			i=0;
+
+			}
+		}
+		function read7(){
+			if(!i){
+
+//for button 8
+				document.getElementById("more8").style.
+				display = "inline";
+				document.getElementById("dots8").style.
+				display = "inline";
+				document.getElementById("read8").innerHTML = "View Less";
+
+
+				i=8
+
+			}
+			else
+			{
+
+				//for button 8
+				document.getElementById("more8").style.
+				display = "none";
+				document.getElementById("dots8").style.
+				display = "inline";
+				document.getElementById("read8").innerHTML = "View More";
+				i=0;
+
+			}
+		}
+		function read8(){
+			if(!i){
+//for button 9
+
+				document.getElementById("more9").style.
+				display = "inline";
+				document.getElementById("dots9").style.
+				display = "inline";
+				document.getElementById("read9").innerHTML = "View Less";
+				i=9
+			}
+			else{
+
+				//for button 9
+				document.getElementById("more9").style.
+				display = "none";
+				document.getElementById("dots9").style.
+				display = "inline";
+				document.getElementById("read9").innerHTML = "View More";
+				i=0;
+			}
+		}
+		function read9(){
+			if(!i){
+
+			//for button 10
+				document.getElementById("more10").style.
+				display = "inline";
+				document.getElementById("dots10").style.
+				display = "inline";
+				document.getElementById("read10").innerHTML = "View Less";
+
+
+				i=10;
+			}
+			else{
+
+
+			//for button 10
+				document.getElementById("more10").style.
+				display = "none";
+				document.getElementById("dots10").style.
+				display = "inline";
+				document.getElementById("read10").innerHTML = "View More";
+			i=0;
+
+			}
+
+		}
+	</script>
+{% endblock content %}

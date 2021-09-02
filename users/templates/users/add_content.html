@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container" style="margin-top: 120px;margin-bottom: 50px;">
+	<div class="row">
+		<div class="col-md-8 mx-auto">
+			<h1>Add course content</h1>
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{form}}
+				<input type="submit" value="Add Course" class="btn" name="">
+			</form>
+		</div>
+	</div>
+</div>
+{% if status %}
+<script>
+	alert("{{status}}");
+</script>
+{% endif %}
+{% endblock content %}

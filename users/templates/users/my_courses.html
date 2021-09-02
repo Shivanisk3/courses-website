@@ -1,0 +1,56 @@
+{% extends 'users/dashboard_base.html' %}
+{% load static %}
+{% block dashboard %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12 mt-2">
+			<h2 class="alert alert-primary">Dashboard &gt; My Courses</h2>
+			
+
+			{% for p in courses %}
+			<div id="" class="post" style="height: 300px;">
+                  <img src="/media/{{p.course_image}}" alt="" class="slider-image">
+                  <div class="post-info">
+                    <h4><a href="#">{{p.course_name}}</a></h4>
+                    <i class="far fa-user">{{p.tutor.first_name}} {{p.tutor.last_name}}</i>
+                    &nbsp;
+                    <button class="btn-success" data-toggle="modal" data-target="#m{{p.id}}"><i class="fa fa-eye">View</i></button>
+                    <a href="{% url 'update_course' %}?pid={{p.id}}" class="btn-primary"><i class="fa fa-edit">Edit</i></a>
+                    <a href="{% url 'delete_course' %}?pid={{p.id}}" class="btn-danger"><i class="fa fa-trash">Delete</i></a>
+                    <button class="btnsmall" style="margin-top: 10px;"><a href="{% url 'content' %}?pid={{p.id}}" style="text-decoration: none;color:white;">Go to Course <i class="fas fa-sign-out-alt"></i></a></button>
+                    
+                  </div>
+            </div>
+
+                      <div class="modal fade" id="m{{p.id}}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Course Details</h4>
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="/media/{{p.course_image}}" alt="" height="200" width="100%">
+                                        <h2>
+                                            <a href="">{{p.course_name}}</a>
+                                        </h2>
+                                        <p>({{p.course_section.sec_name}})</p>
+                                        <p style="font-size:30px;">
+                                            <s style="text-decoration: line-through;">&#8377; {{p.course_price}}</s>
+                                            <strong> &#8377;{{p.sale_price}}</strong>
+                                        </p>
+                                        <p>{{p.details}}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'single_course' %}?pid={{p.id}}" class="btn">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            {% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

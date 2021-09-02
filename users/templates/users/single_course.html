@@ -1,0 +1,129 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" style="background:url('/static/users/img/library.jpg');background-size:100% 100%; margin-top: 80px;">
+        <div class="row py-5" style="background:rgba(0,0,0,0.5)">
+            <div class="col-md-12 py-5 my-5 text-light text-center font-weight-bold text-uppercase">
+                <strong style="font-size: 40px;">{{course.course_name}}</strong>
+            </div>
+        </div>
+    </div>
+
+<div class="container-fluid">
+        <div class="row py-4">
+            <div class="col-md-6 ">
+                <div class=" text-center py-4">
+                    <img src="/media/{{course.course_image}}" alt="No Image" style="height:300px;width:80%;">
+                </div>
+            </div> 
+            <div class="col-md-4" style="">
+            	<div class="py-4" style="text-align: justify;">
+            	<h2>{{course.course_name}}</h2>
+
+            	<h2>Course price : <del style="text-decoration: line-through;">&#8377;{{course.course_price}}</del></h2>
+            	<h2 class="text-danger"><b>Offered price : &#8377;{{course.sale_price}}</b></h2>
+            	<h2>Course Category : {{course.course_section.sec_name}}</h2>
+            	<h3>{{course.details}}</h3>
+            	<form action="{% url 'cart' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{course.id}}" name="pid">
+        <button type="submit" class="btn">
+            <i class="fa fa-shopping-cart"> Add to cart</i>
+        </button>
+        </form>
+                </div>
+            </div>   
+        </div>
+</div>
+<div class="container-fluid" style="background-color: #f67e7d;margin-top: 40px;">
+	<h1><b>Instructor details</b></h1>
+	<div class="row py-4">
+	<div class="col-md-2" style="'margin-left: 40px;">
+		<h2></h2>
+		{{course.tutor.cover_pic}}
+	</div>
+	<div class="col-md-4">
+		<h1>hi,</h1>
+		<h2 style="text-align: center;">I am..</h2>
+	</div>
+	<div class="col-md-4">
+		<h2>{{course.tutor.first_name}} {{course.tutor.last_name}}</h2>
+		<h2>Email : {{course.tutor.email}}</h2>
+		<h2>Member since : {{course.tutor.date_joined}}</h2>
+		<h2></h2>
+	</div>
+	
+	</div>
+</div>
+<div class="container-fluid col-md-6" style="margin-bottom: 60px;margin-top: 60px;">
+    <div style="margin-bottom: 40px;">
+        <h1>Course Modules</h1>
+    </div>
+    {% regroup content by module_no as allmodule %}
+{% for module_no in allmodule %}
+    <div class="accordion" style="margin-bottom: 0px;margin-top: 0px;">
+        <div class="" >
+          <input type="checkbox" name="modules" id="s{{module_no}}" class="accordion_input" value="">
+          <label for="s{{module_no}}" class="accordion__label">Module {{ module_no.grouper }}</label>
+          
+          <div class="accordion__content" style="padding-right: 0px;padding-left: 0px;">
+            <ul>
+              {% for p in module_no.list %}
+              {% if p.doc %}
+              <li><i class="fas fa-play-circle"></i>{{p.chapter}}</li>
+
+              
+              
+              
+              {% endif %}
+
+              {% if p.img %}
+              <li><i class="fas fa-image"></i>{{p.chapter}}</li>
+              {% endif %}
+
+              {% if p.file %}
+              <li><i class="fas fa-file"></i>{{p.chapter}}</li>
+              {% endif %}
+
+              {% if p.resource %}
+              <li><i class="fas fa-download"></i>{{p.chapter}}</li>
+              {% endif %}
+
+              {% endfor %}
+
+            </ul>
+          </div>
+        </div>
+    </div>
+  
+{% endfor %}
+</div>
+
+<style>
+    .accordion__content{
+  background: #fff;
+  line-height: 1.9;
+  font-size: 1em;
+  display: none;
+}
+
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+.accordion__content ul li{
+  display: block;
+  padding: .2em .8em;
+  cursor: pointer;
+  text-decoration: none;
+}
+.accordion__content ul li:hover{
+    background: rgba(0,0,0,0.1);
+}
+.accordion__content ul li i{
+    padding-right: 5%;
+    padding-right: 5%;
+}
+</style>
+{% endblock content %}

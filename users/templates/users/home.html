@@ -1,0 +1,199 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+<section class="home" id="home" style="background:url({% static 'users/img/library1.jpg' %}) no-repeat;background-size: cover;
+    background-position: center;
+    background-attachment: fixed;">
+
+    <h1>Learn from home</h1>
+    <p>This is your one stop hub for learning all types of courses! Register now to get started with your journey!</p>
+
+
+    <div class="col-md-6 mx-auto my-5">
+        <form action="{% url 'all_courses' %}" >
+            <div class="container">
+                <div class="row">
+                
+                    <div class="col-md-7" style="margin-top: 3%; height: 20px;">
+                        <input type="text" name="qry" class="form-control" placeholder="Search by Course Name...">
+                    </div>
+                    {% comment %} <div class="col-md-5">
+                        <input type="text" name="price" class="form-control" placeholder="Search by Price Less than...">
+                    </div> {% endcomment %}
+                    <div class="col-md-2">
+                        <button type="submit" class="btn">Search</button>
+                    </div>
+                
+                </div>
+            </div>
+            </form>
+    </div>
+
+
+    {% if user.is_authenticated %}
+    <h5></h5>
+    {% else %}
+    <a href="{% url 'register' %}"><button id="" class="btn">Register</button></a>
+    {% endif %}
+
+    <div class="shape"></div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- about section starts  -->
+
+<!--
+
+<section class="about" id="about">
+
+    <div class="image">
+        <img src="images/about-img.svg" alt="">
+    </div>
+
+    <div class="content">
+        <h3>why choose us?</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam aperiam quaerat dolor voluptas nobis voluptates illum? Inventore voluptas dolore voluptates.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex delectus ducimus dignissimos pariatur. Amet sed distinctio earum dolorum nulla, in obcaecati aliquid modi quos magni ducimus culpa nobis laudantium incidunt.</p>
+        <a href="#"><button class="btn">learn more</button></a>
+    </div>
+
+
+</section>
+
+-->
+
+<!-- about section ends -->
+
+<!-- course section starts  -->
+
+<section class="course" id="">
+
+<h1 class="heading">top courses</h1>
+
+<div class="box-container">
+
+   
+{% for c in courses %}
+{% if c.id in top %}
+    <div class="box">
+        <img src="/media/{{c.course_image}}" alt="">
+        <h3 class="price">&#8377;{{c.sale_price}}</h3>
+        <div class="content">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+            </div>
+            <a href="#" class="title">{{c.course_name}}</a>
+            <p class="details">{{c.details}}</p>
+            <div class="info">
+                <h3> <i class="far fa-clock"></i> 2 hours </h3>
+                <h3> <i class="far fa-calendar-alt"></i> 6 months </h3>
+                <h3> <i class="fas fa-book"></i> 12 modules </h3>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endfor %}
+    
+</div>
+
+</section>
+
+<br>
+<br>
+<!-- course section ends -->
+
+<!-- teacher section starts  -->
+
+<!--
+<section class="teacher" id="teacher">
+
+<h1 class="heading">our expert teachers</h1>
+
+<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At non explicabo tempora modi, reprehenderit ratione sunt ea porro tenetur officiis alias sapiente praesentium voluptas cumque quo maiores dolores totam ex.</p>
+
+<a href="#"><button class="btn">learn more</button></a>
+
+</section>
+
+-->
+
+<!-- teacher section ends -->
+
+
+<!-- ff0057 nice color-->
+
+<!-- testimonials section starts -->
+
+<section class="testimonials" id="testimonials">
+
+<div class="container">
+  <div class="box_test">
+    <div class="imgBox">
+      <img src="{% static 'users/img/sample1.jpg' %}" width="100%" height="100%">
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      <p>
+        <h4>Mary Smith<br><span></span></h4>
+  </div>
+</div>
+
+<div class="container">
+  <div class="box_test">
+    <div class="imgBox">
+      <img src="{% static 'users/img/profile-3.jpeg' %}" width="100%" height="100%">
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+      <p>
+        <h4>Jenny Kim<br><span></span></h4>
+  </div>
+</div>
+
+</section>
+
+
+<!-- testimonials section ends -->
+
+
+<!-- contact section starts  -->
+
+<section class="contact" id="contact">
+
+<h1 class="heading">contact us</h1>
+
+<div class="row">
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="full name" class="box" name="">
+        <input type="email" placeholder="your email" class="box">
+      <!--  <input type="password" placeholder="your password" class="box">
+        <input type="number" placeholder="your number" class="box"> -->
+        <textarea name="" id="" cols="30" rows="10" class="box address" placeholder="type your message..."></textarea>
+        <input type="submit" class="btn" value="send">
+    </form>
+
+    <div class="image">
+        <img src="" alt="">
+    </div>
+
+</div>
+
+</section>
+
+<!-- contact section ends -->
+
+
+
+
+
+
+
+{% endblock content %}

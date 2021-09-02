@@ -1,0 +1,93 @@
+{% extends 'users/dashboard_base.html' %}
+{% load static %}
+{% block dashboard %}
+
+{% if items|length == 0 %}
+    <div class="container-fluid py-5">
+        <div class="jumbotron alert alert-danger">
+            &times; Your Shopping Cart is empty !!! 
+        </div>
+    </div>
+
+{% else %}
+
+<div class="col-md-12 bg-img py-5 text-center text-light">
+	{% if status %}
+	<h1>{{status}}</h1>
+	{% else %}
+    <h1>My Cart ({{items|length}})</h1>
+    {% endif %}
+	}
+</div>
+{% if user.is_authenticated %}
+{% if msz %}
+    <div class="{{cls}}">{{msz}}</div>
+{% endif %}
+{% for i in items %}
+<div id="row{{i.id}}" class="post">
+    <img src="/media/{{i.course.course_image}}" alt="" class="slider-image">
+    <div class="post-info">
+        <h4><a href="#">{{i.course.course_name}}</a></h4>
+        <i class="fas fa-tags">{{i.course.sale_price}}</i>
+        &nbsp;
+        <button onclick="remove_cart('{{i.id}}')" class="btn-danger"><i class="fas fa-sign-out-alt">Remove</i></button>
+    </div>
+</div>
+{% endfor %}
+
+<table class="table">
+                <tr>
+                    <td>ITEM TOTAL</td>
+                    <td id="item_total"></td>
+                </tr>
+                <tr>
+                    <td>OFFERED PRICE</td>
+                    <td id="disc"></td>
+                </tr>
+                <tr>
+                    <td>YOU SAVED</td>
+                    <td id="offer"></td>
+                </tr>               
+                
+                <tr>
+                    <td>GRAND TOTAL</td>
+                    <td id="grand_total"></td>
+                </tr>
+
+            </table>
+            <div>
+            	<a href="{% url 'process_payment' %}" class="btn-success btn-block text-center" style="padding-top: 5px; padding-bottom: 5px; margin-bottom: 15px;">PROCEED TO PAY <span id="btamt"></span></a>
+            </div>
+
+<script type="">
+	function grandTotal(){
+		$.ajax({
+			url:"{% url 'get_cart_data' %}",
+			type:'get',
+			success:function(data){
+				p = Math.round(100-((data.offer/data.total)*100),2)
+				save = data.total-data.offer;
+				$("#item_total").html("&#8377;"+data.total);
+				$("#disc").html("&#8377;"+data.offer);
+				$("#offer").html("&#8377;"+save+" <span class='text-success'>("+p+"%)</span>");
+				$("#grand_total").html("&#8377;"+data.offer);
+				$("#btamt").html("&#8377;"+data.offer);
+			}
+		})
+	}
+	grandTotal();
+
+	function remove_cart(id){
+		$.ajax({
+			url:"{% url 'del_cart' %}",
+			data:{delete_cart:id},
+			success:function(data){
+				grandTotal();
+				$("#row"+id).hide();
+			}
+		})
+	}
+</script>
+{% endif %}
+{% endif %}
+{% endblock %}

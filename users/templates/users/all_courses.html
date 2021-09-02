@@ -1,0 +1,68 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="sectitle" class="">
+	{% if abcd %}
+	<h1>{{courses|length}} results matched</h1>
+	{% else %}
+    <h1>All Courses ({{courses|length}})</h1>
+	{% endif %}
+</div>
+
+{% for i in courses%}
+<div id="" class="post">
+    <img src="/media/{{i.course_image}}" alt="" class="slider-image">
+    <div class="post-info">
+        <h3><a href="{% url 'single_course' %}?pid={{i.id}}">{{i.course_name}}</a></h3>
+        <i class="far fa-user">{{i.tutor.first_name}} {{i.tutor.last_name}}</i>
+        &nbsp;
+        <form action="{% url 'cart' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{i.id}}" name="pid">
+        <button type="submit" class="btnsmall">
+        	<i class="fa fa-shopping-cart"> Add to cart</i>
+        </button>
+        </form>
+        <!--<i class="far fa-calendar">Jul 1 2021</i>-->
+        
+    </div>
+</div>
+
+{% endfor %}
+
+<style type="text/css">
+.post{
+  height: 300px;
+  width: 300px;
+  margin: 30px 30px;
+  display: inline-block;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1rem 1rem 1rem -1rem #989ca3;
+}
+
+.post .post-info{
+  height: 63px;
+  padding: 5px 5px;
+  /*border: 1px solid green;*/
+}
+
+.post .post-info h3{
+  color: #843b62;
+  margin: 4px;
+}
+.post .post-info h3 a{
+	color: #843b62;
+}
+
+.post .slider-image{
+  width: 100%;
+  height: 200px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+</style>
+
+{% endblock content %}

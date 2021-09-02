@@ -1,0 +1,528 @@
+
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project Courses</title>
+
+    <!-- google fonts cdn link  -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- jquery cdn link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- bootstrap js-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="">
+
+</head>
+<body>
+<!--
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-9" style="background-color:black">
+        left
+      </div>
+
+      <div class="col-3" style="background-color:#ccc;">
+        right
+      </div>
+
+    </div>
+
+  </div>
+-->
+
+<div class="row no-gutters">
+
+  <div class="col-md-9">
+
+    <div class="leftside" style='overflow:auto'>
+
+      <nav class="navbar sticky-top navbar-light navtitle" style="background-color: #843b62;color:white;">
+       <a href="{% url 'order_history' %}" class="navbar-brand" href="#"><i class="fas fa-arrow-left" style="color:white;"></i></a>
+       <h5>{{course}}</h5>
+       <h5></h5>
+      </nav>
+
+      <div class="vi-container">
+      <!--  <iframe id="viBox" src="https://www.youtube.com/embed/HJFxTsX0Ok0" width="" height="" allowfullscreen="allowfullscreen"></iframe>
+-->
+<!--
+     <video src="https://youtu.be/hW0Y_hBrsc8" autoplay>
+
+     </video>
+-->
+<!--
+     <video src="images/video-1.mp4" loop controls class="video"></video>
+-->
+<!--
+     <iframe class="video" src="https://www.youtube.com/embed/HJFxTsX0Ok0" width="" height="" allowfullscreen="allowfullscreen"></iframe>
+-->
+     <video class="video embed-responsive embed-responsive-16by9" controls="controls"><source src="https://www.youtube.com/embed/HJFxTsX0Ok0" type="video/mp4"></video>
+
+     <img class="image1 embed-responsive embed-responsive-16by9" src="">
+
+     <!--<embed class="docum embed-responsive embed-responsive-16by9" src="{% static 'users/img/28_lab2.pdf' %}" width="500" height="375" type="application/pdf"></embed>-->
+
+     <object data="" type="application/pdf" width="300" height="200" class="docum" style="color: white;">
+     Alternet file path : <a href="test.pdf" class="docum2">Click here</a>
+     </object>
+
+
+
+{% if data.user.id == tut %}
+<div style="background: #fff;">
+     <div class="container" style="margin-top: 120px;margin-bottom: 50px;">
+	<div class="row">
+		<div class="col-md-8 mx-auto">
+			<h1>Add course content</h1>
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{form|crispy}}
+				<input type="submit" value="Add Course" class="btn" name="" style="margin-bottom: 50px;">
+			</form>
+		</div>
+	</div>
+</div>
+{% if status %}
+<script>
+	alert("{{status}}");
+</script>
+{% endif %}
+</div>
+{% endif %}
+
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="col-md-3">
+<!--   -md-6  -->
+    <div class="rightside" style='overflow:auto'>
+
+      <nav class="navbar sticky-top navbar-light navtitle" style="background-color: #f67e7d;">
+       <a class="navbar-brand" style="color:white;" href="#">Modules</a>
+     </nav>
+{% regroup content by module_no as allmodule %}
+{% for module_no in allmodule %}
+    <div class="accordion">
+        <div class="">
+          <input type="checkbox" name="modules" id="s{{module_no}}" class="accordion_input" value="">
+          <label for="s{{module_no}}" class="accordion__label">Module {{ module_no.grouper }}</label>
+          
+          <div class="accordion__content">
+            <ul>
+              {% for p in module_no.list %}
+              {% if p.doc %}
+              <li><a href="{{p.doc.url}}" class="video-links"><i class="fas fa-play-circle"></i>{{p.chapter}}</a>
+
+              
+              {% if p.tutor.id == data.user.id %}
+              <a href="" type="button" style="margin-right: 5px; float: right;" data-toggle="modal" data-target="#id{{p.id}}"><i class="fas fa-trash"></i></a>
+              {% endif %}
+              </li>
+              
+              {% endif %}
+
+              {% if p.img %}
+              <li><a href="{{p.img.url}}" class="image-links"><i class="fas fa-image"></i>{{p.chapter}}</a>
+              {% if p.tutor.id == data.user.id %}
+              <a href="" type="button" style="margin-right: 5px; float: right;" data-toggle="modal" data-target="#id{{p.id}}"><i class="fas fa-trash"></i></a>
+              {% endif %}
+              </li>
+              {% endif %}
+
+              {% if p.file %}
+              <li><a href="{{p.file.url}}" class="docum-links"><i class="fas fa-file"></i>{{p.chapter}}</a>
+              {% if p.tutor.id == data.user.id %}
+              <a href="" type="button" style="margin-right: 5px; float: right;" data-toggle="modal" data-target="#id{{p.id}}"><i class="fas fa-trash"></i></a>
+              {% endif %}
+              </li>
+              {% endif %}
+
+              {% if p.resource %}
+              <li><a href="{{p.resource.url}}" class=""><i class="fas fa-download"></i>{{p.chapter}}</a>
+              {% if p.tutor.id == data.user.id %}
+              <a href="" type="button" style="margin-right: 5px; float: right;" data-toggle="modal" data-target="#id{{p.id}}"><i class="fas fa-trash"></i></a>
+              {% endif %}
+              </li>
+              {% endif %}
+<div class="modal fade" id="id{{p.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+	<h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>Chapter No. : {{p.chapter_no}}</h6>
+        <h6>Chapter Name : {{p.chapter}}</h6>
+        <h6>{{p.id}}</h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" onclick="remove_content('{{p.id}}')">Confirm Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </div>
+    </div>
+  
+{% endfor %}
+
+
+        
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<!--
+<script>
+  /*
+  function myFunction(smallLnk)
+  {
+    var fullLnk = document.getElementById('viBox');
+    fullLnk.src=smallLnk.src;
+  }*/
+
+  document.querySelectorAll('.video-links').forEach((links, i) => {
+    links.addEventListener('click',(e)=> {
+      e.preventDefault();
+      var src = links.getAttribute('href');
+      document.querySelector('.iframe').src = src;
+      document.querySelector('.iframe').play();
+    });
+  });
+
+</script>
+-->
+
+
+
+
+
+
+
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+:root{
+    --gradient:linear-gradient(135deg, #f67e7d, #843b62);
+}
+/*
+#0b032d
+#621940
+#ffb997
+*/
+*{
+
+    font-family: 'Open Sans', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    border:none; outline: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+
+
+
+
+.leftside, .rightside{
+  height: 50vh;
+  width: 100%;
+}
+
+@media screen and (min-width:768px)
+{
+  .leftside, .rightside{
+    height: 100vh;
+  }
+}
+
+.leftside{
+  background: #555657;
+}
+
+.rightside{
+  background: white;
+}
+
+
+
+
+
+
+.accordion{
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  background: rgba(246, 126, 125,0.5);
+}
+
+.accordion__label{
+  padding: 14px 20px;
+}
+
+.accordion__label{
+  display: block;
+  color: #000;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+}
+
+.accordion__label:hover{
+  background: rgba(0,0,0,0.1);
+}
+
+.accordion__label::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 12px;
+  height: 6px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="50" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 100,0 50,50" style="fill:%23FFFFFF99;" /></svg>');
+  background-size: contain;
+  transition: transform 0.4s;
+}
+
+.accordion__content{
+  background: #fff;
+  line-height: 1.9;
+  font-size: 1em;
+  display: none;
+}
+
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+a{
+  color: #302e2e;
+}
+a:hover{
+  text-decoration: none;
+  color: #843b62;
+}
+
+.accordion__content ul li{
+  display: block;
+  padding: .2em .8em;
+  cursor: pointer;
+  text-decoration: none;
+}
+.accordion__content ul li:hover{
+    background: rgba(0,0,0,0.1);
+}
+
+
+
+.accordion_input{
+  display: none;
+}
+
+.accordion_input:checked ~ .accordion__content{
+  display: block;
+}
+
+.accordion_input:checked ~ .accordion__label::after{
+  transform: translateY(-50%) rotate(0.5turn);
+}
+
+
+
+
+
+
+
+.vi-container iframe{
+  width: 90%;
+  height:550px;
+  margin-left: 5%;
+  margin-top: 25px;
+  background-color: white;
+}
+
+.vi-container .video{
+  width: 90%;
+  height:550px;
+  margin-left: 5%;
+  margin-top: 25px;
+  display: none;
+}
+.vi-container .docum{
+  width: 90%;
+  height:550px;
+  margin-left: 5%;
+  margin-top: 25px;
+  display: none;
+  
+}
+.vi-container .image1{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border:2px solid #333;
+  border-radius: 5px;
+  display: none;
+}
+
+
+
+.video-container .video{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border:2px solid #333;
+  border-radius: 5px;
+  
+}
+
+
+
+i{
+  padding-right: 8px;
+}
+
+.navtitle{
+  background: var(--gradient);
+}
+
+.docum2{
+	color: #f67e7d;
+}
+.docum2:hover{
+	color: lightblue;
+}
+
+
+.btn{
+    padding:.7rem 3rem;
+    font-size: 1rem;
+    color:#fff;
+    background:var(--gradient);
+    border-radius: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+
+
+@media (max-width:768px){
+  .accordion{
+    min-width: 100%;
+  }
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+document.querySelectorAll('.video-links').forEach(links =>{
+    links.addEventListener('click', (e) =>{
+        e.preventDefault();
+        var src = links.getAttribute('href');
+        document.querySelector('.video').src = src;
+        document.querySelector('.video').play();
+        document.querySelector('.video').style.display = "block";
+        document.querySelector('.image1').style.display = "none";
+        document.querySelector('.docum').style.display = "none";
+        
+    });
+});
+
+document.querySelectorAll('.image-links').forEach(links =>{
+    links.addEventListener('click', (e) =>{
+        e.preventDefault();
+        var src = links.getAttribute('href');
+        document.querySelector('.image1').src = src;
+        document.querySelector('.image1').style.display = "block";
+        document.querySelector('.video').style.display = "none";
+        document.querySelector('.docum').style.display = "none";
+    });
+});
+
+document.querySelectorAll('.docum-links').forEach(links =>{
+    links.addEventListener('click', (e) =>{
+        e.preventDefault();
+        var src = links.getAttribute('href');
+        document.querySelector('.docum').data = src;
+        document.querySelector('.docum2').href = src+"#toolbar=1&#zoom=FitH";
+        document.querySelector('.docum').style.display = "block";
+        document.querySelector('.image1').style.display = "none";
+        document.querySelector('.video').style.display = "none";
+    });
+});
+
+function remove_content(id){
+		$.ajax({
+			url:"{% url 'del_content' %}",
+			data:{delete_content:id},
+			success:function(data){
+				alert("deleted successfully");
+				window.location.reload();
+			}
+		})
+	}
+</script>
+
+
+</body>
+</html>

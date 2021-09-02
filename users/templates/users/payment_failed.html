@@ -1,0 +1,16 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 200px;">
+	<div class="row">
+		<div class="col-md-4 mx-auto my-5 p-5 text-center" style="box-shadow: 0px 0px 10px gray">
+			<img src="{% static 'users/img/error.gif' %}" height="300" width="300">
+			<br>
+			<h1 class="alert alert-danger">PAYMENT FAILED</h1>
+			<div class="my-3">
+				<a href="{% url 'profile' %}" class="btn-success">Return to Dashboard</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

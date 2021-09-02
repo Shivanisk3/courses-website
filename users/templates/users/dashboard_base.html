@@ -1,0 +1,111 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid" style="margin-top: 80px;">
+    <div class="row">
+        <!-- left side menu -->
+        <div class="col-md-2 bg-dark py-5">
+            <nav class="navbar navbar-dark">
+                <a href="" class="navbar-brand">
+                <div class="text-center">
+                    {% if data.profile_pic %}
+                    <img src="/media/{{data.profile_pic}}" style="height:50px;width:50px;border-radius:50%">
+                    {% else %}
+                    <img src="{% static 'users/img/blankuser.png' %}" style="height:50px;width:50px;border-radius:50%">
+                    {% endif %}
+                </div>
+                    <p>{{user.username}}</p>
+                </a>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{% url 'profile' %}" class="nav-link">View Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'edit_profile' %}" class="nav-link">Edit Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'change_password' %}" class="nav-link">Change Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'cart' %}" class="nav-link">My Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'order_history' %}" class="nav-link">Purchased Courses</a>
+                    </li>
+                    {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a href="{% url 'add_course_view' %}" class="nav-link">Add Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'my_courses' %}" class="nav-link">My Courses</a>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a href="" class="nav-link">Send Email</a>
+                    </li>-->
+                   {% endif %}
+                    
+                    <li class="nav-item">
+                        <a href="{% url 'user_logout' %}" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- right side menu -->
+        <div class="col-md-10">
+            {% block dashboard %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+.post{
+  height: 270px;
+  width: 300px;
+  margin: 10px 10px;
+  display: inline-block;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1rem 1rem 1rem -1rem #989ca3;
+}
+
+.post .post-info{
+  height: 63px;
+  padding: 0px 5px;
+  /*border: 1px solid green;*/
+}
+
+.post .post-info h4{
+  color: #444;
+  margin: 5px;
+}
+
+.post .slider-image{
+  width: 100%;
+  height: 200px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.btnsmall{
+	padding:.5rem 2rem;
+    font-size: 1.4rem;
+    color:#fff;
+    background:var(--gradient);
+    border-radius: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+</style>
+
+
+{% endblock content %}

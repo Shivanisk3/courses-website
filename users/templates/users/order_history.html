@@ -1,0 +1,25 @@
+{% extends 'users/dashboard_base.html' %}
+{% load static %}
+{% block dashboard %}
+<div class="col-md-12 bg-img py-5 text-center text-light">
+    <h1>Purchased Courses</h1>
+</div>
+
+<div class="col-md-12 mx-auto">
+{% for i in order_history %}
+  {% if i.status %}
+    {% for j in i.courses %}
+<div id="row" class="post" style="margin-bottom: 20px; height: 300px;">
+    <img src="/media/{{j.course_image}}" alt="" class="slider-image">
+    <div class="post-info">
+        <h3 style="margin-top: 5px;"><a href="{% url 'single_course' %}?pid={{j.id}}">{{j.course_name}}</a></h3>
+        <h4>{{i.date}} (&#8377;{{j.sale_price}})</h4>
+        <a href="{% url 'content' %}?pid={{j.id}}" class="btnsmall" style="margin-top: 5px;"><i class="fas fa-sign-out-alt">Go to course</i></a>
+    </div>
+</div>
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+</div>
+
+{% endblock %}

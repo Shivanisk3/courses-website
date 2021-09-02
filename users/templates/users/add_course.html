@@ -1,0 +1,22 @@
+{% extends 'users/dashboard_base.html' %}
+{% load static %}
+{% block dashboard %}
+<div class="container" style="margin-bottom: 50px;">
+	<div class="row">
+		<div class="col-md-8 mx-auto">
+			<h1>Add course</h1>
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{form}}
+				<input style="margin-top: 30px;" type="submit" value="Add Course" class="btn" name="">
+			</form>
+		</div>
+	</div>
+</div>
+{% if status %}
+<script>
+	alert("{{status}}");
+	window.location = "/profile/"
+</script>
+{% endif %}
+{% endblock %}
